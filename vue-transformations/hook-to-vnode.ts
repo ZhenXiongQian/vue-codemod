@@ -41,7 +41,7 @@ function findNodes(context: any): Node[] {
   parser.AST.traverseNodes(root, {
     enterNode(node: Node) {
       if (
-        node.type==='VElement'&&node.startTag.attributes.length>0
+        node.type==='VIdentifier'&&node.name.indexOf('hook:')===0
       ) {
         toFixNodes.push(node)
       }
@@ -57,18 +57,11 @@ function findNodes(context: any): Node[] {
 function fix(node: any): Operation[] {
   let fixOperations: Operation[] = []
 
-  node.startTag.attributes.filter(
-    (attr:any)=>
-      attr.type==='VAttribute'&&
-      attr.key.name==='on'&&
-      attr.key.argument.name.indexOf('hook:')===0
-  ).forEach((element:any)=>{
-    var temp=element.key.argument;
-    temp=temp.repeat('hook:','vnode-');
-    fixOperations.push(
-      OperationUtils.replaceText(element.key.argument,temp)
-    )
-  })
+  var temp:string =node.name;
+  temp=temp.replace('hook:','vnode-');
+  fixOperations.push(
+    OperationUtils.replaceText(node,temp)
+  )
 
   return fixOperations
 }
