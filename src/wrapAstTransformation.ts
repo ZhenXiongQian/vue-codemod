@@ -19,7 +19,7 @@ export default function astTransformationToJSCodeshiftModule<Params = any>(
 
     transformAST({ root, j, filename: file.path }, options)
 
-    return root.toSource({ lineTerminator: '\n' })
+    return root.toSource({ lineTerminator: '\n'})
   }
 
   return transform

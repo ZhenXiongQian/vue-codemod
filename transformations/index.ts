@@ -23,6 +23,7 @@ const transformationMap: {
   'tree-shaking': require('./tree-shaking'),
   'v-model': require('./v-model'),
   'render-to-resolveComponent': require('./render-to-resolveComponent'),
+  'hook-to-vnode-js':require('./hook-to-vnode-js'),
 
   // atomic ones
   'remove-contextual-h-from-render': require('./remove-contextual-h-from-render'),
