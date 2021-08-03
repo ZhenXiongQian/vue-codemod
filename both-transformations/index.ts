@@ -25,6 +25,11 @@ const transformationMap: {
     templateBeforeScript: false,
     js: require('./add-demo-script'),
     vue: require('./add-demo-template')
+  },
+  'remove-filter': {
+    templateBeforeScript: false,
+    js: require('./remove-filter-script'),
+    vue: require('./remove-filter-template')
   }
 }
 

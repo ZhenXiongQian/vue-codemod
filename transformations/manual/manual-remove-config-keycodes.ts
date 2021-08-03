@@ -4,7 +4,7 @@ import { pushManualList } from '../../src/report'
 
 export const transformAST: ASTTransformation = context => {
   const { root, j, filename } = context
-
+  console.log("fuck")
   const rootNodes: any = root.find(j.MemberExpression, {
     object: {
       object: {

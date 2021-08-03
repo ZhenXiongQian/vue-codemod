@@ -149,19 +149,20 @@ async function main() {
   if (runAllTransformation) {
     const totalRule: number =
       Object.getOwnPropertyNames(builtInTransformations).length +
-      Object.getOwnPropertyNames(vueTransformations).length -
+      Object.getOwnPropertyNames(vueTransformations).length +
+      Object.getOwnPropertyNames(bothTransformations).length -
       excludedTransformations.length -
       excludedVueTransformations.length
     cliInstance.start(totalRule, 0, { process: 'Transformation begins' })
     debug(`run all transformation`)
-    let maunal = []
+    let manual = []
     for (let key in builtInTransformations) {
       if (!excludedTransformations.includes(key)) {
-        cliInstance.increment({ process: `Executing: ${key}` })
-        processTransformation(resolvedPaths, key, builtInTransformations[key])
         if (key.toString().indexOf('manual') !== -1) {
-          console.log('key:', key)
-          maunal.push(key)
+          manual.push(key)
+        }else {
+          cliInstance.increment({ process: `Executing: ${key}` })
+          processTransformation(resolvedPaths, key, builtInTransformations[key])
         }
       } else {
         debug(
@@ -172,11 +173,11 @@ async function main() {
 
     for (let key in vueTransformations) {
       if (!excludedVueTransformations.includes(key)) {
-        cliInstance.increment({ process: `Executing: ${key}` })
-        processTransformation(resolvedPaths, key, vueTransformations[key])
         if (key.toString().indexOf('manual') !== -1) {
-          console.log('key:', key)
-          maunal.push(key)
+          manual.push(key)
+        }else{
+          cliInstance.increment({ process: `Executing: ${key}` })
+          processTransformation(resolvedPaths, key, vueTransformations[key])
         }
       } else {
         debug(
@@ -186,13 +187,19 @@ async function main() {
     }
 
     for (let key in bothTransformations) {
+      cliInstance.increment({ process: `Executing: ${key}` })
       bothProcess(resolvedPaths, key, bothTransformations[key])
     }
 
-    for (let key in maunal) {
+    console.log()
+    console.log("manual:",manual)
+    for (let key in manual) {
+      cliInstance.increment({ process: `Executing: ${key}` })
       if (builtInTransformations[key]) {
+        console.log("js-key:",key)
         processTransformation(resolvedPaths, key, builtInTransformations[key])
       } else if (vueTransformations[key]) {
+        console.log("vue-key:",key)
         processTransformation(resolvedPaths, key, vueTransformations[key])
       }
     }
