@@ -1,5 +1,15 @@
 import { table } from 'table'
+import cliProgress from 'cli-progress'
 
+export const cliInstance = new cliProgress.SingleBar(
+  {
+    format: 'progress [{bar}] {percentage}% | {process} | {value}/{total}',
+    clearOnComplete: false,
+    linewrap: true,
+    fps: 60
+  },
+  cliProgress.Presets.shades_classic
+)
 export function pushManualList(
   path: string,
   node: any,
@@ -14,8 +24,17 @@ export function pushManualList(
   } else {
     index = 0
   }
-  index = node?.value.loc?.start.line + index
-  let position: string = '[' + index + ',' + node?.value.loc?.start.column + ']'
+  let line
+  let column
+  if (node?.loc) {
+    line = node?.loc?.start.line
+    column = node?.loc?.start.column
+  } else {
+    line = node?.value?.loc?.start.line
+    column = node?.value?.loc?.start.column
+  }
+  index = line + index
+  let position: string = '[' + index + ',' + column + ']'
 
   const list = {
     path: path,
