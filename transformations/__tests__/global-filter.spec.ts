@@ -49,7 +49,3 @@ Vue.filter('capitalize', function(value) {
 `,
   'transform global filter(no effect and will warn)'
 )
-
-
-
-
