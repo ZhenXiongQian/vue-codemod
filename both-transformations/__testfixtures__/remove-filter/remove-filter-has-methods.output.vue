@@ -3,6 +3,7 @@
     <p>{{ local_filter(msg) }}</p>
     <p>{{ $filters.global_filter(message) }}</p>
     <p>{{ $filters.global_filter(local_filter(message)) }}</p>
+    <p>{{ $filters.second_filter($filters.global_filter(local_filter(message))) }}</p>
   </div>
 </template>
 
@@ -22,7 +23,15 @@ export default {
       console.log(value)
     },
 
+    test2(value) {
+      console.log(value)
+    },
+
     local_filter(value) {
+      return value.toUpperCase()
+    },
+
+    local_filter2(value) {
       return value.toUpperCase()
     }
   }

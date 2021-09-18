@@ -32,12 +32,12 @@ app.mount("#app");`,
 defineInlineTest(
   transform,
   {},
-  `Vue.createApp(App).use(button_counter).use(router).use(store).mount("#app");
-Vue.directive('demo', {})
+  `Vue.directive('demo', {})
+Vue.createApp(App).use(button_counter).use(router).use(store).mount("#app");
 Vue.component('myComponent',{})
 `,
-  `Vue.createApp(App).use(button_counter).use(router).use(store).mount("#app");
-Vue.directive('demo', {})
+  `Vue.directive('demo', {})
+Vue.createApp(App).use(button_counter).use(router).use(store).mount("#app");
 Vue.component('myComponent',{})`,
   'do not change the code without app.mount'
 )

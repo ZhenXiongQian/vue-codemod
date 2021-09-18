@@ -92,7 +92,6 @@ export function formatterOutput(
     0
   )
   const totalDetected = totalChanged + global.manualList.length
-  console.log(global.manualList)
   const transRate =
     totalDetected == totalChanged
       ? 100

@@ -17,15 +17,10 @@ export type bothTransformationModule = {
 }
 
 // set 'templateBeforeScript' to decide if the transformation code of template part run before the transformation code of script part
-// please set global.buffers=[] before you add data in buffers first time
+// please set 'global.buffers=[]' before you add data in buffers first time
 const transformationMap: {
   [name: string]: bothTransformationModule
 } = {
-  'add-demo': {
-    templateBeforeScript: false,
-    js: require('./add-demo-script'),
-    vue: require('./add-demo-template')
-  },
   'remove-filter': {
     templateBeforeScript: false,
     js: require('./remove-filter-script'),

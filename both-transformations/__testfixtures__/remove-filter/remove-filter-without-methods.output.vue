@@ -18,6 +18,10 @@ export default {
   methods: {
     local_filter(value) {
       return value.toUpperCase();
+    },
+
+    local_filter2(value) {
+      return value.toUpperCase();
     }
   }
 };
